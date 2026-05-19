@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: #f8f8f4;
+    color: #242424;
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
+  }
+}
+
+@layer utilities {
+  .animate-float-soft {
+    animation: float-soft 7s ease-in-out infinite;
+  }
+
+  .animate-rise {
+    animation: rise 0.8s ease both;
+  }
+
+  .animate-rise-delay {
+    animation: rise 0.9s ease 0.12s both;
+  }
+
+  .animate-slide-panel {
+    animation: slide-panel 0.45s ease both;
+  }
+
+  .section-shell {
+    @apply px-4 py-20 md:px-8 md:py-28;
+  }
+
+  .container-wide {
+    @apply mx-auto max-w-[88rem];
+  }
+
+  .clean-card {
+    @apply border border-ink/10 bg-white shadow-soft;
+  }
+
+  .image-clean {
+    @apply saturate-[0.78] contrast-[0.96];
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s ease,
+      transform 0.9s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .animate-float-soft,
+    .animate-rise,
+    .animate-rise-delay,
+    .animate-slide-panel {
+      animation: none;
+    }
+  }
+
+  .h-13 {
+    height: 3.25rem;
+  }
+
+  .w-13 {
+    width: 3.25rem;
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-panel {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
