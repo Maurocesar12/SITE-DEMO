@@ -30,7 +30,7 @@ export function CoursesSection() {
               >
                 <div className="mb-6 aspect-[4/3] overflow-hidden rounded-2xl">
                   <ResponsiveImage
-                    className="image-clean h-44 w-full object-cover transition duration-700 group-hover:scale-105"
+                    className="image-clean h-44 w-full object-cover"
                     src={course.image}
                     alt={course.title}
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"

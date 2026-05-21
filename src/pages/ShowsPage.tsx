@@ -49,7 +49,7 @@ export function ShowsPage({ onBackHome }: ShowsPageProps) {
               return (
                 <article className="clean-card group overflow-hidden rounded-3xl" data-reveal key={show.title}>
                   <ResponsiveImage
-                    className="image-clean h-72 w-full object-cover transition duration-700 group-hover:scale-105"
+                    className="image-clean h-72 w-full object-cover"
                     src={show.image}
                     alt={show.title}
                     sizes="(max-width: 1024px) 100vw, 33vw"

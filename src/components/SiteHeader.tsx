@@ -1,6 +1,8 @@
 import { ArrowRight, ChevronDown, LockKeyhole, Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { navItems, schoolMenuItems } from "../content";
+import { useClickOutside } from "../hooks/useClickOutside";
+import { cn } from "../lib/classNames";
 import { ResponsiveImage } from "./ResponsiveImage";
 
 type SiteHeaderProps = {
@@ -13,6 +15,11 @@ type SiteHeaderProps = {
   onShowTestimonials: () => void;
   onToggleMenu: () => void;
 };
+
+const NAV_BUTTON_CLASS =
+  "rounded-full px-4 py-2 text-sm font-semibold text-ink/62 transition hover:bg-white hover:text-ink";
+const MOBILE_NAV_BUTTON_CLASS = "rounded-xl px-4 py-3 text-left text-sm font-bold text-ink/70 hover:bg-porcelain";
+const menuKey = (item: { id: string; label: string }) => `${item.id}-${item.label}`;
 
 export function SiteHeader({
   isMenuOpen,
@@ -27,17 +34,10 @@ export function SiteHeader({
   const [isSchoolMenuOpen, setIsSchoolMenuOpen] = useState(false);
   const schoolMenuRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const closeSchoolMenuOnOutsideClick = (event: MouseEvent) => {
-      if (!schoolMenuRef.current?.contains(event.target as Node)) {
-        setIsSchoolMenuOpen(false);
-      }
-    };
+  const closeSchoolMenu = useCallback(() => setIsSchoolMenuOpen(false), []);
+  const toggleSchoolMenu = () => setIsSchoolMenuOpen((currentState) => !currentState);
 
-    document.addEventListener("mousedown", closeSchoolMenuOnOutsideClick);
-
-    return () => document.removeEventListener("mousedown", closeSchoolMenuOnOutsideClick);
-  }, []);
+  useClickOutside(schoolMenuRef, closeSchoolMenu);
 
   const openLoginFromMenu = () => {
     onOpenLogin();
@@ -45,7 +45,7 @@ export function SiteHeader({
   };
 
   const handleNavClick = (id: string) => {
-    setIsSchoolMenuOpen(false);
+    closeSchoolMenu();
 
     if (id === "depoimentos") {
       onShowTestimonials();
@@ -97,27 +97,31 @@ export function SiteHeader({
             <button
               aria-expanded={isSchoolMenuOpen}
               aria-haspopup="menu"
-              className={isSchoolMenuOpen ? "inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink transition" : "inline-flex rounded-full px-4 py-2 text-sm font-semibold text-ink/62 transition hover:bg-white hover:text-ink"}
-              onClick={() => setIsSchoolMenuOpen((currentState) => !currentState)}
+              className={cn(
+                "inline-flex rounded-full px-4 py-2 text-sm font-semibold transition",
+                isSchoolMenuOpen ? "bg-white text-ink" : "text-ink/62 hover:bg-white hover:text-ink"
+              )}
+              onClick={toggleSchoolMenu}
               type="button"
             >
               Escola
               <ChevronDown
-                className={isSchoolMenuOpen ? "ml-2 h-4 w-4 rotate-180 transition-transform duration-300" : "ml-2 h-4 w-4 transition-transform duration-300"}
+                className={cn("ml-2 h-4 w-4 transition-transform duration-300", isSchoolMenuOpen && "rotate-180")}
               />
             </button>
             <div
-              className={
+              className={cn(
+                "absolute left-0 top-full z-20 w-60 border-t-2 border-wine bg-white py-2 text-left shadow-soft transition duration-200",
                 isSchoolMenuOpen
-                  ? "visible absolute left-0 top-full z-20 w-60 translate-y-2 border-t-2 border-wine bg-white py-2 text-left opacity-100 shadow-soft transition duration-200"
-                  : "invisible absolute left-0 top-full z-20 w-60 translate-y-3 border-t-2 border-wine bg-white py-2 text-left opacity-0 shadow-soft transition duration-200"
-              }
+                  ? "visible translate-y-2 opacity-100"
+                  : "invisible translate-y-3 opacity-0"
+              )}
               role="menu"
             >
               {schoolMenuItems.map((item) => (
                 <button
                   className="block w-full px-4 py-3 text-left text-sm font-medium text-ink/76 transition hover:bg-porcelain hover:text-wine"
-                  key={`${item.id}-${item.label}`}
+                  key={menuKey(item)}
                   onClick={() => handleNavClick(item.id)}
                   role="menuitem"
                   type="button"
@@ -129,8 +133,8 @@ export function SiteHeader({
           </div>
           {navItems.map((item) => (
             <button
-              className="rounded-full px-4 py-2 text-sm font-semibold text-ink/62 transition hover:bg-white hover:text-ink"
-              key={`${item.id}-${item.label}`}
+              className={NAV_BUTTON_CLASS}
+              key={menuKey(item)}
               onClick={() => handleNavClick(item.id)}
               type="button"
             >
@@ -172,8 +176,8 @@ export function SiteHeader({
         <div className="mx-auto mt-3 grid max-h-[calc(100dvh-5.5rem)] max-w-[88rem] gap-2 overflow-y-auto rounded-2xl border border-ink/10 bg-white p-3 shadow-soft lg:hidden">
           {navItems.map((item) => (
             <button
-              className="rounded-xl px-4 py-3 text-left text-sm font-bold text-ink/70 hover:bg-porcelain"
-              key={`${item.id}-${item.label}`}
+              className={MOBILE_NAV_BUTTON_CLASS}
+              key={menuKey(item)}
               onClick={() => handleNavClick(item.id)}
               type="button"
             >
@@ -182,8 +186,8 @@ export function SiteHeader({
           ))}
           {schoolMenuItems.map((item) => (
             <button
-              className="rounded-xl px-4 py-3 text-left text-sm font-bold text-ink/70 hover:bg-porcelain"
-              key={`${item.id}-${item.label}`}
+              className={MOBILE_NAV_BUTTON_CLASS}
+              key={menuKey(item)}
               onClick={() => handleNavClick(item.id)}
               type="button"
             >

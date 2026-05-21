@@ -44,7 +44,7 @@ export function TestimonialsPage({ onBackHome }: TestimonialsPageProps) {
             return (
               <article className="clean-card group overflow-hidden rounded-3xl" data-reveal key={item.name}>
                 <ResponsiveImage
-                  className="image-clean h-60 w-full object-cover transition duration-700 group-hover:scale-105"
+                  className="image-clean h-60 w-full object-cover"
                   src={item.image}
                   alt={item.name}
                   sizes="(max-width: 1024px) 100vw, 33vw"
@@ -85,13 +85,13 @@ export function TestimonialsPage({ onBackHome }: TestimonialsPageProps) {
                 <article className="group overflow-hidden rounded-3xl border border-ink/10 bg-porcelain" data-reveal key={item.title}>
                   <div className="relative">
                     <ResponsiveImage
-                      className="image-clean h-72 w-full object-cover transition duration-700 group-hover:scale-105"
+                      className="image-clean h-72 w-full object-cover"
                       src={item.image}
                       alt={item.title}
                       sizes="(max-width: 1024px) 100vw, 33vw"
                     />
                     <button
-                      className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-wine shadow-soft transition group-hover:scale-110"
+                      className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-wine shadow-soft transition duration-500 hover:scale-[1.04]"
                       type="button"
                       aria-label={`Reproduzir ${item.title}`}
                     >

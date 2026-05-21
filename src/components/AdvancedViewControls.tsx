@@ -1,18 +1,22 @@
-import { Contrast, Eye, Minus, Plus, RotateCcw, SlidersHorizontal, Sparkles } from "lucide-react";
+import { Contrast, Eye, Minus, Moon, Plus, RotateCcw, SlidersHorizontal, Sparkles } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { cn } from "../lib/classNames";
 
+type ThemeMode = "light" | "dark";
 type TextScale = "normal" | "large" | "xl";
 
 type ViewSettings = {
+  themeMode: ThemeMode;
   textScale: TextScale;
   highContrast: boolean;
   calmMotion: boolean;
   focusMode: boolean;
 };
 
-const storageKey = "agnes:view-settings";
+const STORAGE_KEY = "agnes:view-settings";
 
 const defaultSettings: ViewSettings = {
+  themeMode: "light",
   textScale: "normal",
   highContrast: false,
   calmMotion: false,
@@ -23,7 +27,7 @@ const textScaleOrder: TextScale[] = ["normal", "large", "xl"];
 
 function readStoredSettings(): ViewSettings {
   try {
-    const rawSettings = window.localStorage.getItem(storageKey);
+    const rawSettings = window.localStorage.getItem(STORAGE_KEY);
 
     if (!rawSettings) {
       return defaultSettings;
@@ -52,6 +56,7 @@ export function AdvancedViewControls() {
       Number(settings.highContrast) +
       Number(settings.calmMotion) +
       Number(settings.focusMode) +
+      Number(settings.themeMode !== "light") +
       Number(settings.textScale !== "normal"),
     [settings]
   );
@@ -60,11 +65,12 @@ export function AdvancedViewControls() {
     const root = document.documentElement;
 
     root.dataset.viewText = settings.textScale;
+    root.dataset.viewTheme = settings.themeMode;
     root.dataset.viewContrast = settings.highContrast ? "high" : "normal";
     root.dataset.viewMotion = settings.calmMotion ? "calm" : "default";
     root.dataset.viewFocus = settings.focusMode ? "on" : "off";
 
-    window.localStorage.setItem(storageKey, JSON.stringify(settings));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
   }, [settings]);
 
   const updateSetting = <Key extends keyof ViewSettings>(key: Key, value: ViewSettings[Key]) => {
@@ -72,6 +78,32 @@ export function AdvancedViewControls() {
   };
 
   const resetSettings = () => setSettings(defaultSettings);
+  const settingButtons = [
+    {
+      icon: Moon,
+      isActive: settings.themeMode === "dark",
+      label: "Modo noturno",
+      onClick: () => updateSetting("themeMode", settings.themeMode === "dark" ? "light" : "dark")
+    },
+    {
+      icon: Contrast,
+      isActive: settings.highContrast,
+      label: "Alto contraste",
+      onClick: () => updateSetting("highContrast", !settings.highContrast)
+    },
+    {
+      icon: Sparkles,
+      isActive: settings.calmMotion,
+      label: "Movimento suave",
+      onClick: () => updateSetting("calmMotion", !settings.calmMotion)
+    },
+    {
+      icon: SlidersHorizontal,
+      isActive: settings.focusMode,
+      label: "Modo leitura",
+      onClick: () => updateSetting("focusMode", !settings.focusMode)
+    }
+  ];
 
   return (
     <aside
@@ -126,33 +158,22 @@ export function AdvancedViewControls() {
               </div>
             </div>
 
-            <button
-              aria-pressed={settings.highContrast}
-              className={settings.highContrast ? "view-control-button is-active" : "view-control-button"}
-              onClick={() => updateSetting("highContrast", !settings.highContrast)}
-              type="button"
-            >
-              <Contrast className="h-5 w-5" />
-              Alto contraste
-            </button>
-            <button
-              aria-pressed={settings.calmMotion}
-              className={settings.calmMotion ? "view-control-button is-active" : "view-control-button"}
-              onClick={() => updateSetting("calmMotion", !settings.calmMotion)}
-              type="button"
-            >
-              <Sparkles className="h-5 w-5" />
-              Movimento suave
-            </button>
-            <button
-              aria-pressed={settings.focusMode}
-              className={settings.focusMode ? "view-control-button is-active" : "view-control-button"}
-              onClick={() => updateSetting("focusMode", !settings.focusMode)}
-              type="button"
-            >
-              <SlidersHorizontal className="h-5 w-5" />
-              Modo leitura
-            </button>
+            <div className="rounded-2xl border border-ink/10 bg-white p-3 text-xs font-bold leading-5 text-ink/58">
+              Os ajustes sao aplicados em tempo real e ficam salvos neste navegador.
+            </div>
+
+            {settingButtons.map(({ icon: Icon, isActive, label, onClick }) => (
+              <button
+                aria-pressed={isActive}
+                className={cn("view-control-button", isActive && "is-active")}
+                key={label}
+                onClick={onClick}
+                type="button"
+              >
+                <Icon className="h-5 w-5" />
+                {label}
+              </button>
+            ))}
           </div>
         </div>
       )}

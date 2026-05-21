@@ -1,6 +1,7 @@
 import { ArrowRight, BookOpen, CalendarDays, LogOut, ShieldCheck, Sparkles, X } from "lucide-react";
 import { useState } from "react";
 import { portalCards, studentUpdates } from "../content";
+import { cn } from "../lib/classNames";
 
 type LoginModalProps = {
   onClose: () => void;
@@ -68,7 +69,10 @@ export function LoginModal({ onClose }: LoginModalProps) {
             <div className="mt-10 grid gap-3">
               {["Inicio", "Materiais", "Agenda", "Financeiro", "Suporte"].map((item, index) => (
                 <button
-                  className={index === 0 ? "rounded-full bg-wine px-4 py-3 text-left text-sm font-black text-white" : "rounded-full px-4 py-3 text-left text-sm font-bold text-ink/62 hover:bg-white"}
+                  className={cn(
+                    "rounded-full px-4 py-3 text-left text-sm",
+                    index === 0 ? "bg-wine font-black text-white" : "font-bold text-ink/62 hover:bg-white"
+                  )}
                   key={item}
                   type="button"
                 >

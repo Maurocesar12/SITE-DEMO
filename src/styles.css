@@ -11,6 +11,8 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overscroll-behavior-y: contain;
   }
 
   html[data-view-text="large"] {
@@ -25,6 +27,8 @@
     margin: 0;
     min-width: 320px;
     overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
     background: #f8f8f4;
     color: #242424;
     text-rendering: optimizeLegibility;
@@ -74,6 +78,26 @@
 
   .image-clean {
     @apply saturate-[0.78] contrast-[0.96];
+    transform-origin: center;
+    transition:
+      filter 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .group:hover .image-clean {
+    transform: scale(1.012);
+  }
+
+  .hover\:-translate-y-1:hover {
+    transform: translateY(-0.1rem);
+  }
+
+  .hover\:-translate-y-0\.5:hover {
+    transform: translateY(-0.05rem);
+  }
+
+  .hover\:shadow-soft:hover {
+    box-shadow: 0 14px 38px rgba(36, 36, 36, 0.08);
   }
 
   .mobile-safe-title {
@@ -91,6 +115,56 @@
 
   /* AdvancedViewControls writes data attributes on <html>; the CSS below keeps
      the modes independent from React components and easy to adjust later. */
+  html[data-view-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  html[data-view-theme="dark"] body {
+    background-color: #11110f;
+    color: #f4f1e8;
+  }
+
+  html[data-view-theme="dark"] .bg-porcelain,
+  html[data-view-theme="dark"] .bg-pearl,
+  html[data-view-theme="dark"] .bg-white,
+  html[data-view-theme="dark"] [class*="bg-white/"] {
+    background-color: #1b1b18 !important;
+  }
+
+  html[data-view-theme="dark"] .bg-ink {
+    background-color: #f4f1e8 !important;
+    color: #171713 !important;
+  }
+
+  html[data-view-theme="dark"] .text-ink,
+  html[data-view-theme="dark"] [class*="text-ink/"] {
+    color: #f4f1e8 !important;
+  }
+
+  html[data-view-theme="dark"] .text-white,
+  html[data-view-theme="dark"] [class*="text-white/"] {
+    color: #fffaf0 !important;
+  }
+
+  html[data-view-theme="dark"] [class*="border-ink/"] {
+    border-color: rgba(244, 241, 232, 0.18) !important;
+  }
+
+  html[data-view-theme="dark"] .shadow-soft,
+  html[data-view-theme="dark"] [class*="shadow-"] {
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38) !important;
+  }
+
+  html[data-view-theme="dark"] input,
+  html[data-view-theme="dark"] select {
+    background-color: #24241f !important;
+    color: #f4f1e8 !important;
+  }
+
+  html[data-view-theme="dark"] .image-clean {
+    filter: saturate(0.72) contrast(0.98) brightness(0.82);
+  }
+
   html[data-view-contrast="high"] body,
   html[data-view-contrast="high"] .bg-porcelain,
   html[data-view-contrast="high"] .bg-pearl,
@@ -107,6 +181,23 @@
     border-color: rgba(36, 36, 36, 0.28) !important;
   }
 
+  html[data-view-theme="dark"][data-view-contrast="high"] body,
+  html[data-view-theme="dark"][data-view-contrast="high"] .bg-porcelain,
+  html[data-view-theme="dark"][data-view-contrast="high"] .bg-pearl,
+  html[data-view-theme="dark"][data-view-contrast="high"] .bg-white,
+  html[data-view-theme="dark"][data-view-contrast="high"] [class*="bg-white/"] {
+    background-color: #050505 !important;
+  }
+
+  html[data-view-theme="dark"][data-view-contrast="high"] .text-ink,
+  html[data-view-theme="dark"][data-view-contrast="high"] [class*="text-ink/"] {
+    color: #ffffff !important;
+  }
+
+  html[data-view-theme="dark"][data-view-contrast="high"] [class*="border-ink/"] {
+    border-color: rgba(255, 255, 255, 0.42) !important;
+  }
+
   html[data-view-motion="calm"] *,
   html[data-view-motion="calm"] *::before,
   html[data-view-motion="calm"] *::after {
@@ -114,6 +205,11 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html[data-view-motion="calm"] .group:hover .image-clean,
+  html[data-view-motion="calm"] [class*="hover:-translate-y"]:hover {
+    transform: none !important;
   }
 
   html[data-view-focus="on"] .shadow-soft,
@@ -125,27 +221,74 @@
     filter: saturate(0.92) contrast(1.02);
   }
 
+  html[data-view-theme="dark"][data-view-focus="on"] .image-clean {
+    filter: saturate(0.78) contrast(1.08) brightness(0.9);
+  }
+
   html[data-view-focus="on"] main > section {
     scroll-margin-top: 6rem;
   }
 
   [data-reveal] {
     opacity: 0;
-    transform: translateY(28px);
+    filter: blur(8px);
+    transform: translate3d(0, 30px, 0);
     transition:
-      opacity 0.9s ease,
-      transform 0.9s ease;
+      opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, filter, transform;
+  }
+
+  [data-reveal="fade"] {
+    transform: translate3d(0, 16px, 0);
+  }
+
+  [data-reveal="slide-left"] {
+    transform: translate3d(-34px, 0, 0);
+  }
+
+  [data-reveal="slide-right"] {
+    transform: translate3d(34px, 0, 0);
+  }
+
+  [data-reveal="scale"] {
+    transform: scale(0.96);
+  }
+
+  [data-reveal] .image-clean {
+    transform: scale(1.08);
+    transition:
+      filter 1s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 80ms);
   }
 
   [data-reveal].is-visible {
     opacity: 1;
-    transform: translateY(0);
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  [data-reveal].is-visible .image-clean {
+    transform: scale(1);
+  }
+
+  [data-reveal].is-visible.group:hover .image-clean,
+  [data-reveal].is-visible .group:hover .image-clean {
+    transform: scale(1.012);
   }
 
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] {
       opacity: 1;
+      filter: none;
+      transform: none;
+      transition: none;
+    }
+
+    [data-reveal] .image-clean {
       transform: none;
       transition: none;
     }

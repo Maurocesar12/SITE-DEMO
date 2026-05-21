@@ -1,6 +1,7 @@
 import { PlayCircle } from "lucide-react";
 import { portalCards } from "../content";
 import { SectionEyebrow } from "../components/SectionEyebrow";
+import { cn } from "../lib/classNames";
 
 type PortalSectionProps = {
   onOpenLogin: () => void;
@@ -35,7 +36,13 @@ export function PortalSection({ onOpenLogin }: PortalSectionProps) {
               <strong className="block font-display text-3xl leading-none">Portal Agnes</strong>
               <div className="mt-8 flex gap-2 overflow-x-auto text-sm font-bold text-white/62 lg:grid lg:overflow-visible">
                 {["Inicio", "Materiais", "Agenda", "Financeiro", "Suporte"].map((item, index) => (
-                  <span className={index === 0 ? "whitespace-nowrap rounded-full bg-white px-4 py-3 text-ink" : "whitespace-nowrap rounded-full px-4 py-3"} key={item}>
+                  <span
+                    className={cn(
+                      "whitespace-nowrap rounded-full px-4 py-3",
+                      index === 0 && "bg-white text-ink"
+                    )}
+                    key={item}
+                  >
                     {item}
                   </span>
                 ))}

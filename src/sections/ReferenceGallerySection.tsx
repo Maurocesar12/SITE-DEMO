@@ -1,6 +1,7 @@
 import { referenceGallery } from "../content";
 import { ResponsiveImage } from "../components/ResponsiveImage";
 import { SectionEyebrow } from "../components/SectionEyebrow";
+import { cn } from "../lib/classNames";
 
 export function ReferenceGallerySection() {
   return (
@@ -22,12 +23,15 @@ export function ReferenceGallerySection() {
         <div className="grid gap-4 md:grid-cols-3">
           {referenceGallery.map((item, index) => (
             <article
-              className={index === 5 ? "group overflow-hidden rounded-3xl border border-ink/10 bg-porcelain md:col-span-2" : "group overflow-hidden rounded-3xl border border-ink/10 bg-porcelain"}
+              className={cn(
+                "group overflow-hidden rounded-3xl border border-ink/10 bg-porcelain",
+                index === 5 && "md:col-span-2"
+              )}
               data-reveal
               key={item.title}
             >
               <ResponsiveImage
-                className="image-clean h-72 w-full object-cover transition duration-700 group-hover:scale-105"
+                className="image-clean h-72 w-full object-cover"
                 src={item.image}
                 alt={item.title}
                 sizes={index === 5 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}

@@ -31,7 +31,7 @@ export function UserJourneySection() {
             >
               <div className="relative overflow-hidden">
                 <ResponsiveImage
-                  className="image-clean h-56 w-full object-cover transition duration-700 group-hover:scale-105"
+                  className="image-clean h-56 w-full object-cover"
                   src={step.image}
                   alt={step.title}
                   sizes="(max-width: 1024px) 100vw, 25vw"
