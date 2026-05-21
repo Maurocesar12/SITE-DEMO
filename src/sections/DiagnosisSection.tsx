@@ -8,7 +8,7 @@ export function DiagnosisSection() {
         <div className="mb-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end" data-reveal>
           <div>
             <SectionEyebrow>Diagnostico do site atual</SectionEyebrow>
-            <h2 className="font-display text-5xl leading-none md:text-7xl">
+            <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
               A escola tem conteudo forte, mas a experiencia pode vender muito mais.
             </h2>
           </div>

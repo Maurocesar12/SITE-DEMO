@@ -19,12 +19,12 @@ const studentProfiles = [
 
 export function ContactSection() {
   return (
-    <section className="px-4 pb-20 md:px-8 md:pb-28" id="contato">
-      <div className="mx-auto grid max-w-[88rem] gap-10 rounded-3xl border border-ink/10 bg-white p-5 text-ink shadow-soft md:grid-cols-[0.9fr_1.1fr] md:p-10" data-reveal>
-        <div className="flex flex-col justify-between rounded-2xl bg-piano-room bg-cover bg-center p-7 text-white">
+    <section className="px-4 pb-20 sm:px-6 md:px-8 md:pb-28" id="contato">
+      <div className="mx-auto grid max-w-[88rem] gap-6 rounded-3xl border border-ink/10 bg-white p-4 text-ink shadow-soft md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:p-10" data-reveal>
+        <div className="flex min-h-80 flex-col justify-between rounded-2xl bg-piano-room bg-cover bg-center p-6 text-white md:p-7">
           <div>
           <SectionEyebrow className="text-white/80">Conversao</SectionEyebrow>
-            <h2 className="font-display text-5xl leading-none md:text-6xl">
+            <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-6xl">
               Aula experimental com fluxo comercial mais inteligente.
             </h2>
           </div>
@@ -44,10 +44,10 @@ export function ContactSection() {
           </div>
         </div>
 
-        <form className="grid gap-4 rounded-[1.4rem] bg-white p-5 text-ink md:p-7">
+        <form className="grid gap-4 rounded-[1.4rem] bg-white p-3 text-ink sm:p-5 md:p-7" aria-label="Solicitar aula experimental">
           <label className="grid gap-2 text-sm font-black text-ink/62">
             Nome do responsavel
-            <input className="h-12 rounded-2xl border border-ink/10 bg-porcelain px-4 font-medium outline-none ring-brass/30 transition focus:ring-4" placeholder="Digite o nome" type="text" />
+            <input autoComplete="name" className="h-12 rounded-2xl border border-ink/10 bg-porcelain px-4 font-medium outline-none ring-brass/30 transition focus:ring-4" placeholder="Digite o nome" type="text" />
           </label>
           <label className="grid gap-2 text-sm font-black text-ink/62">
             Interesse musical
@@ -67,7 +67,7 @@ export function ContactSection() {
           </label>
           <label className="grid gap-2 text-sm font-black text-ink/62">
             WhatsApp
-            <input className="h-12 rounded-2xl border border-ink/10 bg-porcelain px-4 font-medium outline-none ring-brass/30 transition focus:ring-4" placeholder="(21) 99999-9999" type="tel" />
+            <input autoComplete="tel" className="h-12 rounded-2xl border border-ink/10 bg-porcelain px-4 font-medium outline-none ring-brass/30 transition focus:ring-4" inputMode="tel" placeholder="(21) 99999-9999" type="tel" />
           </label>
           <button className="mt-2 inline-flex h-13 min-h-12 items-center justify-center gap-2 rounded-full bg-wine px-6 font-black text-white transition hover:-translate-y-0.5" type="button">
             Solicitar aula experimental

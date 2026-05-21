@@ -8,11 +8,11 @@ type PortalSectionProps = {
 
 export function PortalSection({ onOpenLogin }: PortalSectionProps) {
   return (
-    <section className="overflow-hidden bg-white px-4 py-20 text-ink md:px-8 md:py-28" id="portal">
+    <section className="overflow-hidden bg-white px-4 py-16 text-ink sm:px-6 md:px-8 md:py-28" id="portal">
       <div className="mx-auto grid max-w-[88rem] gap-12 xl:grid-cols-[0.72fr_1.28fr] xl:items-center">
         <div data-reveal>
           <SectionEyebrow>Area de login</SectionEyebrow>
-          <h2 className="font-display text-5xl leading-none md:text-7xl">
+          <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
             Portal do aluno para materiais, agenda e suporte.
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-8 text-ink/62">
@@ -33,9 +33,9 @@ export function PortalSection({ onOpenLogin }: PortalSectionProps) {
           <div className="grid overflow-hidden rounded-2xl bg-white text-ink lg:grid-cols-[220px_1fr]">
             <aside className="bg-ink p-5 text-white">
               <strong className="block font-display text-3xl leading-none">Portal Agnes</strong>
-              <div className="mt-8 grid gap-2 text-sm font-bold text-white/62">
+              <div className="mt-8 flex gap-2 overflow-x-auto text-sm font-bold text-white/62 lg:grid lg:overflow-visible">
                 {["Inicio", "Materiais", "Agenda", "Financeiro", "Suporte"].map((item, index) => (
-                  <span className={index === 0 ? "rounded-full bg-white px-4 py-3 text-ink" : "rounded-full px-4 py-3"} key={item}>
+                  <span className={index === 0 ? "whitespace-nowrap rounded-full bg-white px-4 py-3 text-ink" : "whitespace-nowrap rounded-full px-4 py-3"} key={item}>
                     {item}
                   </span>
                 ))}
@@ -44,7 +44,7 @@ export function PortalSection({ onOpenLogin }: PortalSectionProps) {
             <div className="p-5 md:p-7">
               <div className="rounded-[1.25rem] bg-piano-room bg-cover bg-center p-6 text-white">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-brass">Aluno</p>
-                <h3 className="mt-10 font-display text-5xl leading-none">Maria Clara</h3>
+                <h3 className="mt-10 font-display text-4xl leading-none sm:text-5xl">Maria Clara</h3>
                 <p className="mt-2 text-white/72">Piano | Terca-feira, 15h | Professora Agnes</p>
               </div>
               <div className="mt-4 grid gap-3 md:grid-cols-3">

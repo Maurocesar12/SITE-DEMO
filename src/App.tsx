@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AdvancedViewControls } from "./components/AdvancedViewControls";
 import { LoginModal } from "./components/LoginModal";
 import { ScrollProgress } from "./components/ScrollProgress";
 import { SiteHeader } from "./components/SiteHeader";
@@ -88,6 +89,7 @@ function App() {
       {currentPage === "shows" && <ShowsPage onBackHome={showHome} />}
       {currentPage === "team" && <TeamPage onBackHome={showHome} />}
 
+      <AdvancedViewControls />
       {isLoginOpen && <LoginModal onClose={closeLogin} />}
     </div>
   );

@@ -10,13 +10,13 @@ export function LoginModal({ onClose }: LoginModalProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <div className="fixed inset-0 z-[70] grid place-items-center bg-ink/55 p-4 backdrop-blur-md" role="dialog" aria-modal="true">
-      <div className="animate-slide-panel grid max-h-[92vh] w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-soft lg:grid-cols-[0.42fr_0.58fr]">
+    <div className="fixed inset-0 z-[70] grid place-items-center bg-ink/55 p-3 backdrop-blur-md sm:p-4" role="dialog" aria-modal="true">
+      <div className="animate-slide-panel grid max-h-[94dvh] w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-soft lg:grid-cols-[0.42fr_0.58fr]">
         <aside className="bg-porcelain p-6 text-ink md:p-8">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-wine">Portal demo</p>
-              <h2 className="mt-4 font-display text-5xl leading-none">Area do aluno</h2>
+              <h2 className="mt-4 font-display text-4xl leading-none sm:text-5xl">Area do aluno</h2>
             </div>
             <button
               aria-label="Fechar login demo"
@@ -35,6 +35,7 @@ export function LoginModal({ onClose }: LoginModalProps) {
                   E-mail do aluno
                   <input
                     className="h-12 rounded-2xl border border-ink/10 bg-white px-4 font-medium text-ink outline-none ring-wine/20 transition placeholder:text-ink/35 focus:ring-4"
+                    autoComplete="email"
                     defaultValue="aluno@agnesmoco.com.br"
                     type="email"
                   />
@@ -43,6 +44,7 @@ export function LoginModal({ onClose }: LoginModalProps) {
                   Senha
                   <input
                     className="h-12 rounded-2xl border border-ink/10 bg-white px-4 font-medium text-ink outline-none ring-wine/20 transition placeholder:text-ink/35 focus:ring-4"
+                    autoComplete="current-password"
                     defaultValue="demo123"
                     type="password"
                   />

@@ -1,14 +1,15 @@
 import { courses } from "../content";
 import { SectionEyebrow } from "../components/SectionEyebrow";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 
 export function CoursesSection() {
   return (
-    <section className="bg-porcelain px-4 py-20 text-ink md:px-8 md:py-28" id="cursos">
+    <section className="bg-porcelain px-4 py-16 text-ink sm:px-6 md:px-8 md:py-28" id="cursos">
       <div className="mx-auto max-w-[88rem]">
         <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end" data-reveal>
           <div>
             <SectionEyebrow>Cursos e metodologia</SectionEyebrow>
-            <h2 className="max-w-4xl font-display text-5xl leading-none md:text-7xl">
+            <h2 className="mobile-safe-title max-w-4xl font-display text-4xl leading-none sm:text-5xl md:text-7xl">
               Do conteudo atual para uma vitrine clara de modalidades.
             </h2>
           </div>
@@ -27,11 +28,12 @@ export function CoursesSection() {
                 data-reveal
                 key={course.title}
               >
-                <div className="mb-6 overflow-hidden rounded-2xl">
-                  <img
+                <div className="mb-6 aspect-[4/3] overflow-hidden rounded-2xl">
+                  <ResponsiveImage
                     className="image-clean h-44 w-full object-cover transition duration-700 group-hover:scale-105"
                     src={course.image}
                     alt={course.title}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   />
                 </div>
                 <div className="flex items-start justify-between gap-4">

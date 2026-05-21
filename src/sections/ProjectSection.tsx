@@ -7,7 +7,7 @@ export function ProjectSection() {
       <div className="mx-auto max-w-[88rem]">
         <div className="mb-12 max-w-4xl" data-reveal>
           <SectionEyebrow>Projeto avancado</SectionEyebrow>
-          <h2 className="font-display text-5xl leading-none md:text-7xl">
+          <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
             Uma entrega em fases para ficar bonita, funcional e facil de aprovar.
           </h2>
         </div>

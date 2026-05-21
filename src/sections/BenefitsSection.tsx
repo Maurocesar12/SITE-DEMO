@@ -7,7 +7,7 @@ export function BenefitsSection() {
       <div className="mx-auto max-w-[88rem]">
         <div className="mb-12 max-w-4xl" data-reveal>
           <SectionEyebrow>Valor da proposta</SectionEyebrow>
-          <h2 className="font-display text-5xl leading-none md:text-7xl">
+          <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
             O redesign resolve problemas diferentes para cada publico.
           </h2>
         </div>

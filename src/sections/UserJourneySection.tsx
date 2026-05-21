@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 import { SectionEyebrow } from "../components/SectionEyebrow";
 import { journeySteps } from "../content";
 
@@ -10,7 +11,7 @@ export function UserJourneySection() {
         <div className="mb-12 grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end" data-reveal>
           <div>
             <SectionEyebrow>Experiencia do usuario</SectionEyebrow>
-            <h2 className="font-display text-5xl leading-none md:text-7xl">
+            <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
               Uma jornada mais clara que a maioria dos sites de escola.
             </h2>
           </div>
@@ -29,10 +30,11 @@ export function UserJourneySection() {
               style={{ "--reveal-delay": `${index * 90}ms` } as CSSProperties}
             >
               <div className="relative overflow-hidden">
-                <img
+                <ResponsiveImage
                   className="image-clean h-56 w-full object-cover transition duration-700 group-hover:scale-105"
                   src={step.image}
                   alt={step.title}
+                  sizes="(max-width: 1024px) 100vw, 25vw"
                 />
                 <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-black text-ink backdrop-blur">
                   {String(index + 1).padStart(2, "0")}

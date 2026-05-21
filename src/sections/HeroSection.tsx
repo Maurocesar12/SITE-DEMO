@@ -1,4 +1,5 @@
 import { ArrowRight, ChevronRight, Star } from "lucide-react";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 
 type HeroSectionProps = {
   onNavigate: (id: string) => void;
@@ -8,10 +9,19 @@ type HeroSectionProps = {
 export function HeroSection({ onNavigate, onOpenLogin }: HeroSectionProps) {
   return (
     <section
-      className="relative isolate flex min-h-[92vh] items-end overflow-hidden bg-hero-stage bg-cover bg-center px-4 pb-10 pt-32 text-white md:px-8 md:pb-16"
+      className="relative isolate flex min-h-[92svh] items-end overflow-hidden bg-ink px-4 pb-10 pt-32 text-white sm:px-6 md:px-8 md:pb-16"
       id="inicio"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(36,36,36,.10)_0%,rgba(36,36,36,.36)_45%,rgba(36,36,36,.86)_100%)]" />
+      <ResponsiveImage
+        alt="Familia em atividade musical na Escola Agnes Moco"
+        className="absolute inset-0 h-full w-full object-cover"
+        fetchPriority="high"
+        loading="eager"
+        sizes="100vw"
+        src="/site-images/shantala-familia.jpg"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(42,42,40,.88),rgba(90,90,86,.60),rgba(42,42,40,.28))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(36,36,36,.14)_0%,rgba(36,36,36,.38)_45%,rgba(36,36,36,.88)_100%)]" />
       <div className="animate-float-soft absolute right-[5vw] top-32 hidden w-[23rem] rounded-3xl border border-white/20 bg-white/14 p-4 shadow-soft backdrop-blur-xl xl:block">
         <div className="aspect-[4/3] rounded-2xl bg-piano-room bg-cover bg-center" />
         <div className="mt-4 grid gap-3">
@@ -34,16 +44,15 @@ export function HeroSection({ onNavigate, onOpenLogin }: HeroSectionProps) {
 
       <div className="relative z-10 mx-auto grid w-full max-w-[88rem] gap-12 xl:grid-cols-[minmax(0,1fr)_28rem] xl:items-end">
         <div className="max-w-5xl">
-              <p className="animate-rise mb-4 inline-flex rounded-full border border-white/25 bg-white/12 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-white/85 backdrop-blur">
-                Redesign limpo para apresentacao comercial
+              <p className="animate-rise mb-4 inline-flex rounded-full border border-white/25 bg-white/12 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white/85 backdrop-blur sm:tracking-[0.2em]">
+                Experiencia digital para familias
               </p>
-              <h1 className="animate-rise-delay max-w-5xl font-display text-[clamp(3.4rem,8vw,7.8rem)] font-semibold leading-[0.9] tracking-normal">
+              <h1 className="mobile-safe-title animate-rise-delay max-w-5xl font-display text-[clamp(2.65rem,13vw,7.8rem)] font-semibold leading-[0.94] tracking-normal sm:leading-[0.9]">
                 Escola de Musica Agnes Moco
               </h1>
               <p className="mt-7 max-w-3xl text-lg leading-8 text-white/82 md:text-xl">
-            Uma reformulacao para posicionar a escola acima do comum no ramo: navegacao clara,
-            imagens reais, prova social, captacao de alunos, agenda artistica e area de login em
-            uma experiencia continua.
+            Um site mais leve, seguro e acolhedor para apresentar cursos, metodologia, agenda
+            artistica, depoimentos e area do aluno em uma experiencia continua.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <button

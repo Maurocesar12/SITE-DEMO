@@ -1,5 +1,6 @@
 import { ArrowRight, ChevronDown, LockKeyhole, Menu, X } from "lucide-react";
 import { navItems, schoolMenuItems } from "../content";
+import { ResponsiveImage } from "./ResponsiveImage";
 
 type SiteHeaderProps = {
   isMenuOpen: boolean;
@@ -48,7 +49,7 @@ export function SiteHeader({
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-white/92 px-4 py-3 text-ink shadow-[0_8px_30px_rgba(36,36,36,0.06)] backdrop-blur-xl md:px-8">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/10 bg-white/95 px-4 py-3 text-ink shadow-[0_8px_30px_rgba(36,36,36,0.06)] backdrop-blur-xl md:px-8">
       <div className="mx-auto flex max-w-[88rem] items-center justify-between gap-5">
         <button
           aria-label="Ir para o inicio"
@@ -57,11 +58,19 @@ export function SiteHeader({
           type="button"
         >
           <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-full border border-wine/25 bg-porcelain">
-            <img className="h-full w-full object-cover" src="/site-images/logo-agnes-moco.jpg" alt="Agnes Moco" />
+            <ResponsiveImage
+              alt="Agnes Moco"
+              className="h-full w-full object-cover"
+              loading="eager"
+              sizes="48px"
+              src="/site-images/logo-agnes-moco.jpg"
+            />
           </span>
-          <span>
+          <span className="min-w-0">
             <strong className="block font-display text-xl leading-none">Agnes Moco</strong>
-            <small className="text-xs uppercase tracking-[0.22em] text-ink/50">Escola de Musica</small>
+            <small className="text-xs uppercase tracking-[0.16em] text-ink/50 sm:tracking-[0.22em]">
+              Escola de Musica
+            </small>
           </span>
         </button>
 
@@ -78,7 +87,7 @@ export function SiteHeader({
               {schoolMenuItems.map((item) => (
                 <button
                   className="block w-full px-4 py-3 text-left text-sm font-medium text-ink/76 transition hover:bg-porcelain hover:text-wine"
-                  key={item.id}
+                  key={`${item.id}-${item.label}`}
                   onClick={() => handleNavClick(item.id)}
                   type="button"
                 >
@@ -90,7 +99,7 @@ export function SiteHeader({
           {navItems.map((item) => (
             <button
               className="rounded-full px-4 py-2 text-sm font-semibold text-ink/62 transition hover:bg-white hover:text-ink"
-              key={item.id}
+              key={`${item.id}-${item.label}`}
               onClick={() => handleNavClick(item.id)}
               type="button"
             >
@@ -129,11 +138,11 @@ export function SiteHeader({
       </div>
 
       {isMenuOpen && (
-        <div className="mx-auto mt-3 grid max-w-[88rem] gap-2 rounded-2xl border border-ink/10 bg-white p-3 shadow-soft lg:hidden">
+        <div className="mx-auto mt-3 grid max-h-[calc(100dvh-5.5rem)] max-w-[88rem] gap-2 overflow-y-auto rounded-2xl border border-ink/10 bg-white p-3 shadow-soft lg:hidden">
           {navItems.map((item) => (
             <button
               className="rounded-xl px-4 py-3 text-left text-sm font-bold text-ink/70 hover:bg-porcelain"
-              key={item.id}
+              key={`${item.id}-${item.label}`}
               onClick={() => handleNavClick(item.id)}
               type="button"
             >
@@ -143,7 +152,7 @@ export function SiteHeader({
           {schoolMenuItems.map((item) => (
             <button
               className="rounded-xl px-4 py-3 text-left text-sm font-bold text-ink/70 hover:bg-porcelain"
-              key={item.id}
+              key={`${item.id}-${item.label}`}
               onClick={() => handleNavClick(item.id)}
               type="button"
             >
@@ -152,6 +161,13 @@ export function SiteHeader({
           ))}
           <button
             className="rounded-xl bg-wine px-4 py-3 text-left text-sm font-black text-white"
+            onClick={() => handleNavClick("contato")}
+            type="button"
+          >
+            Agendar aula
+          </button>
+          <button
+            className="rounded-xl border border-ink/10 px-4 py-3 text-left text-sm font-black text-ink/70"
             onClick={openLoginFromMenu}
             type="button"
           >

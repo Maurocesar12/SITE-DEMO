@@ -1,4 +1,5 @@
 import { referenceGallery } from "../content";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 import { SectionEyebrow } from "../components/SectionEyebrow";
 
 export function ReferenceGallerySection() {
@@ -8,7 +9,7 @@ export function ReferenceGallerySection() {
         <div className="mb-12 grid gap-6 lg:grid-cols-[0.7fr_1fr] lg:items-end" data-reveal>
           <div>
             <SectionEyebrow>Imagens reais do site atual</SectionEyebrow>
-            <h2 className="font-display text-5xl leading-none md:text-7xl">
+            <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
               Referencias reais conectadas a uma nova experiencia.
             </h2>
           </div>
@@ -25,10 +26,11 @@ export function ReferenceGallerySection() {
               data-reveal
               key={item.title}
             >
-              <img
+              <ResponsiveImage
                 className="image-clean h-72 w-full object-cover transition duration-700 group-hover:scale-105"
                 src={item.image}
                 alt={item.title}
+                sizes={index === 5 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
               />
               <div className="flex items-center justify-between p-5">
                 <strong>{item.title}</strong>

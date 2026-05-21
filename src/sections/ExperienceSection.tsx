@@ -7,7 +7,7 @@ export function ExperienceSection() {
       <div className="mx-auto grid max-w-[88rem] gap-12 lg:grid-cols-[0.82fr_1.18fr]">
         <div className="lg:sticky lg:top-28 lg:self-start" data-reveal>
           <SectionEyebrow>Experiencia completa</SectionEyebrow>
-          <h2 className="font-display text-5xl leading-none md:text-7xl">
+          <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
             Uma arquitetura para mostrar autoridade e gerar desejo.
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-8 text-ink/62">

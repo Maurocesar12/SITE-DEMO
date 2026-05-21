@@ -1,6 +1,7 @@
 import { ArrowLeft, MessageCircle, Star } from "lucide-react";
-import { commentFeed, testimonials, videoTestimonials } from "../content";
+import { ResponsiveImage } from "../components/ResponsiveImage";
 import { SectionEyebrow } from "../components/SectionEyebrow";
+import { commentFeed, testimonials, videoTestimonials } from "../content";
 
 type TestimonialsPageProps = {
   onBackHome: () => void;
@@ -23,33 +24,34 @@ export function TestimonialsPage({ onBackHome }: TestimonialsPageProps) {
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end" data-reveal>
             <div>
               <SectionEyebrow>O que contam da gente</SectionEyebrow>
-              <h1 className="font-display text-6xl leading-none md:text-8xl">
-                Histórias que mostram a escola por quem vive a experiência.
+              <h1 className="mobile-safe-title font-display text-5xl leading-none sm:text-6xl md:text-8xl">
+                Historias que mostram a escola por quem vive a experiencia.
               </h1>
             </div>
             <p className="max-w-2xl text-lg leading-8 text-ink/62">
-              Uma página dedicada a depoimentos ajuda a transformar confiança em decisão. Aqui entram
-              relatos de pais, alunos, vídeos de bastidores e comentários curtos que reforçam a
-              metodologia, o cuidado e a evolução dos alunos.
+              Uma pagina dedicada a depoimentos ajuda a transformar confianca em decisao. Aqui entram
+              relatos de pais, alunos, videos de bastidores e comentarios curtos que reforcam a
+              metodologia, o cuidado e a evolucao dos alunos.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="px-4 pb-20 md:px-8">
+      <section className="px-4 pb-20 sm:px-6 md:px-8">
         <div className="container-wide grid gap-4 lg:grid-cols-3">
           {testimonials.map((item) => {
             const Icon = item.icon;
             return (
               <article className="clean-card group overflow-hidden rounded-3xl" data-reveal key={item.name}>
-                <img
+                <ResponsiveImage
                   className="image-clean h-60 w-full object-cover transition duration-700 group-hover:scale-105"
                   src={item.image}
                   alt={item.name}
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                 />
                 <div className="p-6">
                   <Icon className="mb-6 h-7 w-7 text-wine" />
-                  <p className="text-lg leading-8 text-ink/72">“{item.text}”</p>
+                  <p className="text-lg leading-8 text-ink/72">"{item.text}"</p>
                   <div className="mt-8 border-t border-ink/10 pt-5">
                     <strong className="block">{item.name}</strong>
                     <span className="text-sm text-ink/50">{item.role}</span>
@@ -65,14 +67,14 @@ export function TestimonialsPage({ onBackHome }: TestimonialsPageProps) {
         <div className="container-wide">
           <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div data-reveal>
-              <SectionEyebrow>Vídeos</SectionEyebrow>
-              <h2 className="max-w-3xl font-display text-5xl leading-none md:text-7xl">
-                Relatos em vídeo para dar vida à apresentação.
+              <SectionEyebrow>Videos</SectionEyebrow>
+              <h2 className="mobile-safe-title max-w-3xl font-display text-4xl leading-none sm:text-5xl md:text-7xl">
+                Relatos em video para dar vida a apresentacao.
               </h2>
             </div>
             <p className="max-w-md leading-7 text-ink/62">
-              Os cards abaixo simulam uma área de vídeos. No projeto real, podem abrir YouTube,
-              Instagram, Vimeo ou vídeos hospedados no próprio site.
+              Os cards abaixo simulam uma area de videos. No projeto real, podem abrir YouTube,
+              Instagram, Vimeo ou videos hospedados no proprio site.
             </p>
           </div>
 
@@ -82,10 +84,11 @@ export function TestimonialsPage({ onBackHome }: TestimonialsPageProps) {
               return (
                 <article className="group overflow-hidden rounded-3xl border border-ink/10 bg-porcelain" data-reveal key={item.title}>
                   <div className="relative">
-                    <img
+                    <ResponsiveImage
                       className="image-clean h-72 w-full object-cover transition duration-700 group-hover:scale-105"
                       src={item.image}
                       alt={item.title}
+                      sizes="(max-width: 1024px) 100vw, 33vw"
                     />
                     <button
                       className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-wine shadow-soft transition group-hover:scale-110"
@@ -112,9 +115,9 @@ export function TestimonialsPage({ onBackHome }: TestimonialsPageProps) {
       <section className="section-shell">
         <div className="container-wide grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
           <div className="lg:sticky lg:top-28" data-reveal>
-            <SectionEyebrow>Comentários</SectionEyebrow>
-            <h2 className="font-display text-5xl leading-none md:text-7xl">
-              Comentários curtos para reforçar prova social.
+            <SectionEyebrow>Comentarios</SectionEyebrow>
+            <h2 className="mobile-safe-title font-display text-4xl leading-none sm:text-5xl md:text-7xl">
+              Comentarios curtos para reforcar prova social.
             </h2>
           </div>
 
